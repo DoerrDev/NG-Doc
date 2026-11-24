@@ -1,0 +1,558 @@
+:root {
+  --vp-font-family-base: 'Inter', 'Microsoft YaHei UI', 'PingFang SC', system-ui, sans-serif;
+  --vp-c-brand-1: #c8431f;
+  --vp-c-brand-2: #a9371a;
+  --vp-c-brand-3: #e5532d;
+  --vp-c-brand-soft: #fbe9e2;
+  --ng-hand: 'Caveat', 'Ma Shan Zheng', cursive;
+  --ng-zh-hand: 'Ma Shan Zheng', 'Caveat', 'KaiTi', cursive;
+}
+
+/* 顶栏站名使用手写字体，与应用内的手写标题一致 */
+.VPNavBarTitle .title {
+  font-family: var(--ng-hand);
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.ng-home {
+  --ng-ink: #1c1b19;
+  --ng-paper: #f4f1ea;
+  --ng-accent: #e5532d;
+  --ng-muted: #6b665d;
+  --ng-rule: #bdb6a8;
+  color: var(--ng-ink);
+  background: var(--ng-paper);
+}
+
+.ng-shell {
+  width: min(100% - 96px, 1160px);
+  margin-inline: auto;
+}
+
+/* ---------- 首屏 ---------- */
+.ng-hero {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: 24px;
+  padding-block: clamp(40px, 7vw, 96px) clamp(48px, 6vw, 80px);
+}
+
+.ng-intro h1 {
+  position: relative;
+  z-index: 0;
+  margin: 0;
+  font-size: clamp(44px, 6.4vw, 92px);
+  line-height: 1.08;
+  font-weight: 900;
+  letter-spacing: -.06em;
+}
+
+.ng-intro h1 em {
+  position: relative;
+  font-style: normal;
+  white-space: nowrap;
+}
+
+.ng-intro h1 em::after {
+  position: absolute;
+  z-index: -1;
+  left: -2%;
+  right: -4%;
+  bottom: .06em;
+  height: .2em;
+  border-radius: 40% 60% 50% 40%;
+  background: var(--ng-accent);
+  opacity: .85;
+  transform: rotate(-1.5deg);
+  content: '';
+}
+
+.ng-lede {
+  max-width: 400px;
+  margin: 26px 0 0;
+  color: var(--ng-muted);
+  font-size: 17px;
+  line-height: 1.85;
+}
+
+.ng-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+  margin-top: 34px;
+}
+
+.ng-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 50px;
+  padding: 0 22px;
+  border-radius: 3px;
+  background: var(--ng-ink);
+  color: var(--ng-paper);
+  font-size: 15px;
+  font-weight: 700;
+  transition: transform .15s;
+}
+
+.ng-primary:hover {
+  transform: translateY(-2px);
+}
+
+.ng-secondary {
+  padding-bottom: 2px;
+  border-bottom: 2px solid var(--ng-ink);
+  font-weight: 700;
+}
+
+.ng-build {
+  margin-top: 20px;
+  color: var(--ng-muted);
+  font-size: 12.5px;
+}
+
+.ng-home a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.ng-home a.ng-primary {
+  color: var(--ng-paper);
+}
+
+/* ---------- 手绘轨迹演示 ---------- */
+.ng-sketch {
+  position: relative;
+  margin: 0;
+  cursor: pointer;
+}
+
+.ng-sketch svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.ng-stroke,
+.ng-arrow {
+  fill: none;
+  stroke: var(--ng-ink);
+  stroke-width: 13;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ng-stroke {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: ng-draw 5.2s infinite cubic-bezier(.45, .05, .4, 1);
+}
+
+.ng-arrow {
+  opacity: 0;
+  animation: ng-arrow 5.2s infinite;
+}
+
+.ng-dot {
+  fill: var(--ng-accent);
+  animation: ng-dot 5.2s infinite;
+}
+
+.ng-note {
+  fill: var(--ng-muted);
+  font-family: var(--ng-zh-hand);
+  font-size: 30px;
+  opacity: 0;
+}
+
+.ng-n1 { animation: ng-n1 5.2s infinite; }
+.ng-n2 { animation: ng-n2 5.2s infinite; }
+.ng-n3 { animation: ng-n3 5.2s infinite; }
+
+.ng-callout {
+  position: absolute;
+  right: 0;
+  bottom: -6%;
+  padding: 14px 18px;
+  border: 2px solid var(--ng-ink);
+  border-radius: 4px;
+  background: #fffdf8;
+  box-shadow: 5px 5px 0 var(--ng-ink);
+  opacity: 0;
+  transform: rotate(-1.5deg);
+  animation: ng-callout 5.2s infinite;
+}
+
+.ng-callout small {
+  display: block;
+  color: var(--ng-muted);
+  font-size: 12px;
+}
+
+.ng-callout strong {
+  display: block;
+  margin: 3px 0 8px;
+  font-size: 18px;
+}
+
+.ng-callout kbd {
+  display: inline-block;
+  margin-right: 4px;
+  padding: 3px 8px;
+  border: 1.5px solid var(--ng-ink);
+  border-radius: 3px;
+  background: var(--ng-paper);
+  font: 12px var(--vp-font-family-mono);
+}
+
+@keyframes ng-dot { 0%, 3% { opacity: 0; } 6%, 88% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes ng-n1 { 0%, 4% { opacity: 0; } 9%, 88% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes ng-draw { 0%, 10% { stroke-dashoffset: 1; opacity: 1; } 46% { stroke-dashoffset: 0; } 88% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+@keyframes ng-n2 { 0%, 20% { opacity: 0; } 25%, 88% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes ng-n3 { 0%, 36% { opacity: 0; } 41%, 88% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes ng-arrow { 0%, 45% { opacity: 0; } 48%, 88% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes ng-callout {
+  0%, 52% { opacity: 0; transform: rotate(-1.5deg) translateY(8px); }
+  57%, 88% { opacity: 1; transform: rotate(-1.5deg); }
+  100% { opacity: 0; transform: rotate(-1.5deg); }
+}
+
+/* ---------- 功能动画卡片 ---------- */
+.ng-features {
+  padding-bottom: 56px;
+  border-top: 2px solid var(--ng-ink);
+}
+
+.ng-sect-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 30px 0 22px;
+}
+
+.ng-sect-head h2,
+.ng-more h2 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -.03em;
+}
+
+.ng-sect-head span {
+  color: var(--ng-muted);
+  font-family: var(--ng-zh-hand);
+  font-size: 22px;
+}
+
+.ng-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 34px 28px;
+}
+
+.ng-demo {
+  display: block;
+  min-width: 0;
+}
+
+.ng-stage {
+  --ng-loop: 6.4s;
+  margin-bottom: 16px;
+  border: 2px solid var(--ng-ink);
+  border-radius: 4px;
+  background: #fffdf8;
+  box-shadow: 5px 5px 0 var(--ng-ink);
+  overflow: hidden;
+  transition: transform .15s, box-shadow .15s;
+}
+
+.ng-demo:hover .ng-stage {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 var(--ng-accent);
+}
+
+.ng-stage svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.ng-tag {
+  color: var(--ng-accent);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+.ng-demo h3 {
+  margin: 2px 0 6px;
+  font-size: 19px;
+  font-weight: 750;
+}
+
+.ng-demo p {
+  margin: 0;
+  color: var(--ng-muted);
+  font-size: 14.5px;
+  line-height: 1.7;
+}
+
+.ng-demo code {
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: #ece7dc;
+  color: var(--ng-ink);
+  font-size: 13px;
+}
+
+/* 舞台里的通用图元 */
+.d-chrome { fill: #ebe6da; }
+.d-tab { fill: #f8f5ee; stroke: var(--ng-ink); stroke-width: 1.5; }
+.d-line { fill: #d9d3c6; }
+.d-link { fill: #8aa6d6; }
+.d-bar { fill: #c9c2b3; }
+.d-bar.is-hot { fill: var(--ng-accent); }
+.d-ink { fill: var(--ng-ink); }
+.d-paper { fill: #f4f1ea; }
+.d-dot { fill: var(--ng-accent); }
+.d-shadow { fill: var(--ng-ink); }
+.d-card { fill: #fffdf8; stroke: var(--ng-ink); stroke-width: 2; }
+.d-addr { fill: #fff; stroke: #bdb6a8; stroke-width: 1.2; }
+.d-mouse { fill: #fffdf8; stroke: var(--ng-ink); stroke-width: 2.4; }
+.d-thin { fill: none; stroke: var(--ng-ink); stroke-width: 2; stroke-linecap: round; }
+.d-chev { fill: none; stroke: var(--ng-accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.d-cur { fill: #fff; stroke: var(--ng-ink); stroke-width: 1.6; stroke-linejoin: round; }
+.d-hl { fill: #f9d3c5; transform-box: fill-box; transform-origin: left center; }
+.d-hand { fill: var(--ng-muted); font-family: var(--ng-zh-hand); font-size: 17px; }
+.d-key { fill: var(--ng-ink); font-family: var(--ng-zh-hand); font-size: 18px; }
+.d-text { fill: var(--ng-ink); font-size: 17px; font-weight: 600; }
+.d-zh { fill: var(--ng-ink); font-size: 19px; font-weight: 700; }
+.d-small { fill: var(--ng-muted); font-size: 11.5px; }
+.d-btn { fill: #f4f1ea; font-size: 11.5px; font-weight: 700; }
+.d-mono { fill: var(--ng-ink); font: 11px var(--vp-font-family-mono); }
+.d-file { fill: var(--ng-ink); font-size: 13px; font-weight: 700; }
+
+.ng-stage :is(g, rect, path, circle, text) {
+  animation-duration: var(--ng-loop);
+  animation-iteration-count: infinite;
+}
+
+/* 01 边角触发：光标移到左边，滚两格，标签页依次切换 */
+.a-cur { animation-name: a-cur; animation-timing-function: cubic-bezier(.5, 0, .3, 1); transform: translate(190px, 122px); }
+.a-edge { fill: var(--ng-accent); opacity: 0; animation-name: a-edge; }
+.a-wheel { opacity: 0; animation-name: a-wheel; }
+.a-ind { fill: var(--ng-accent); animation-name: a-ind; }
+@keyframes a-cur { 0%, 10% { transform: translate(190px, 122px); } 30%, 90% { transform: translate(3px, 112px); } 100% { transform: translate(190px, 122px); } }
+@keyframes a-edge { 0%, 29% { opacity: 0; } 33%, 88% { opacity: .9; } 95%, 100% { opacity: 0; } }
+@keyframes a-wheel {
+  0%, 36% { opacity: 0; transform: translateY(-4px); }
+  40% { opacity: 1; transform: translateY(0); }
+  48%, 56% { opacity: 0; transform: translateY(6px); }
+  57% { opacity: 0; transform: translateY(-4px); }
+  61% { opacity: 1; transform: translateY(0); }
+  69%, 100% { opacity: 0; transform: translateY(6px); }
+}
+@keyframes a-ind { 0%, 41% { transform: translateX(0); } 45%, 62% { transform: translateX(78px); } 66%, 92% { transform: translateX(156px); } 98%, 100% { transform: translateX(0); } }
+
+/* 02 滚轮触发：右键按住，滚轮向下，窗口最小化到任务栏 */
+.b-rb { fill: var(--ng-accent); opacity: 0; animation-name: b-rb; }
+.b-wh { opacity: 0; animation-name: b-wh; }
+.b-win { transform-box: fill-box; transform-origin: 50% 100%; animation-name: b-win; animation-timing-function: cubic-bezier(.5, 0, .4, 1); }
+.b-ico { fill: #f8f5ee; stroke: var(--ng-ink); stroke-width: 1.5; animation-name: b-ico; }
+.b-key { opacity: 0; animation-name: b-key; }
+@keyframes b-rb { 0%, 10% { opacity: 0; } 14%, 86% { opacity: 1; } 92%, 100% { opacity: 0; } }
+@keyframes b-wh {
+  0%, 26% { opacity: 0; transform: translateY(-6px); }
+  32% { opacity: 1; transform: translateY(0); }
+  42%, 100% { opacity: 0; transform: translateY(10px); }
+}
+@keyframes b-win {
+  0%, 42% { opacity: 1; transform: none; }
+  56%, 88% { opacity: 0; transform: translate(21px, 40px) scale(.12); }
+  89% { opacity: 0; transform: none; }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes b-ico { 0%, 54% { fill: #f8f5ee; } 58%, 88% { fill: var(--ng-accent); } 94%, 100% { fill: #f8f5ee; } }
+@keyframes b-key { 0%, 40% { opacity: 0; transform: translateY(6px); } 46%, 88% { opacity: 1; transform: none; } 94%, 100% { opacity: 0; } }
+
+/* 03 截图：变暗、拖选、生成贴图并挪开、出现工具栏 */
+.c-dim { fill: var(--ng-ink); opacity: 0; animation-name: c-dim; }
+.c-sel { fill: rgb(255 255 255 / .3); stroke: var(--ng-accent); stroke-width: 2.5; transform-box: fill-box; transform-origin: 0 0; animation-name: c-sel; animation-timing-function: cubic-bezier(.4, 0, .3, 1); }
+.c-pin { opacity: 0; animation-name: c-pin; animation-timing-function: cubic-bezier(.4, 0, .3, 1); }
+.c-bar,
+.c-note { opacity: 0; animation-name: c-bar; }
+@keyframes c-dim { 0%, 8% { opacity: 0; } 14%, 42% { opacity: .42; } 48%, 100% { opacity: 0; } }
+@keyframes c-sel { 0%, 16% { opacity: 1; transform: scale(0); } 36%, 44% { opacity: 1; transform: scale(1); } 48%, 100% { opacity: 0; transform: scale(1); } }
+@keyframes c-pin { 0%, 44% { opacity: 0; transform: none; } 48% { opacity: 1; transform: none; } 62%, 90% { opacity: 1; transform: translate(80px, -36px); } 97%, 100% { opacity: 0; transform: translate(80px, -36px); } }
+@keyframes c-bar { 0%, 63% { opacity: 0; } 68%, 90% { opacity: 1; } 97%, 100% { opacity: 0; } }
+
+/* 04 AI 翻译：选中两行，卡片弹出，译文逐字出现，最后出现复制按钮 */
+.d-hl1 { transform: scaleX(0); animation-name: d-hl1; }
+.d-hl2 { transform: scaleX(0); animation-name: d-hl2; }
+.d-pop { opacity: 0; animation-name: d-pop; }
+.d-type { transform-box: fill-box; transform-origin: left center; transform: scaleX(0); animation-name: d-type; }
+.d-busy { animation-name: d-busy; }
+.d-done { opacity: 0; animation-name: d-done; }
+@keyframes d-hl1 { 0%, 6% { transform: scaleX(0); } 16%, 92% { transform: scaleX(1); } 98%, 100% { transform: scaleX(0); } }
+@keyframes d-hl2 { 0%, 16% { transform: scaleX(0); } 24%, 92% { transform: scaleX(1); } 98%, 100% { transform: scaleX(0); } }
+@keyframes d-pop { 0%, 30% { opacity: 0; transform: translateY(8px); } 35%, 92% { opacity: 1; transform: none; } 98%, 100% { opacity: 0; } }
+@keyframes d-type { 0%, 40% { transform: scaleX(0); animation-timing-function: steps(10, end); } 68%, 92% { transform: scaleX(1); } 98%, 100% { transform: scaleX(0); } }
+@keyframes d-busy { 0%, 67% { opacity: 1; } 70%, 100% { opacity: 0; } }
+@keyframes d-done { 0%, 69% { opacity: 0; } 73%, 92% { opacity: 1; } 98%, 100% { opacity: 0; } }
+
+/* 05 选中就搜：选词、画手势、浏览器打开并填好搜索词 */
+.e-hl { transform: scaleX(0); animation-name: e-hl; }
+.e-stroke { fill: none; stroke: var(--ng-ink); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation-name: e-stroke; }
+.e-dot { fill: var(--ng-accent); opacity: 0; animation-name: e-dot; }
+.e-br { opacity: 0; animation-name: e-br; }
+.e-type { transform-box: fill-box; transform-origin: left center; transform: scaleX(0); animation-name: e-type; }
+.e-res { opacity: 0; animation-name: e-res; }
+@keyframes e-hl { 0%, 4% { transform: scaleX(0); } 14%, 92% { transform: scaleX(1); } 98%, 100% { transform: scaleX(0); } }
+@keyframes e-dot { 0%, 18% { opacity: 0; } 21%, 46% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@keyframes e-stroke { 0%, 22% { stroke-dashoffset: 1; opacity: 1; } 42%, 46% { stroke-dashoffset: 0; opacity: 1; } 50%, 100% { stroke-dashoffset: 0; opacity: 0; } }
+@keyframes e-br { 0%, 48% { opacity: 0; transform: translateY(10px); } 53%, 92% { opacity: 1; transform: none; } 98%, 100% { opacity: 0; } }
+@keyframes e-type { 0%, 54% { transform: scaleX(0); animation-timing-function: steps(14, end); } 72%, 92% { transform: scaleX(1); } 98%, 100% { transform: scaleX(0); } }
+@keyframes e-res { 0%, 73% { opacity: 0; } 78%, 92% { opacity: 1; } 98%, 100% { opacity: 0; } }
+
+/* 06 区域录屏：蓝框 → 开始录制变红框计时 → 导出 MP4 / GIF */
+.f-ball { fill: var(--ng-accent); animation-name: f-ball; animation-timing-function: ease-in-out; }
+.f-rec { animation-name: f-rec; }
+.f-sel { fill: none; stroke-width: 3; stroke-dasharray: 8 5; animation-name: f-sel; }
+.f-start { animation-name: f-start; }
+.f-stop,
+.f-time { opacity: 0; animation-name: f-stop; }
+.ng-stage .f-red { fill: #e03b2b; animation-name: f-blink; animation-duration: 1s; }
+.f-t1 { animation-name: f-t1; }
+.f-t2 { opacity: 0; animation-name: f-t2; }
+.f-t3 { opacity: 0; animation-name: f-t3; }
+.f-files { opacity: 0; animation-name: f-files; }
+@keyframes f-ball { 0%, 30% { transform: none; } 45% { transform: translate(60px, -6px); } 60% { transform: translate(120px, 4px); } 72%, 100% { transform: translate(140px, 0); } }
+@keyframes f-rec { 0%, 4% { opacity: 0; } 10%, 74% { opacity: 1; } 79%, 100% { opacity: 0; } }
+@keyframes f-sel { 0%, 26% { stroke: #2f6fdc; } 28%, 100% { stroke: #e03b2b; } }
+@keyframes f-start { 0%, 26% { opacity: 1; } 28%, 100% { opacity: 0; } }
+@keyframes f-stop { 0%, 26% { opacity: 0; } 28%, 100% { opacity: 1; } }
+@keyframes f-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: .15; } }
+@keyframes f-t1 { 0%, 43% { opacity: 1; } 44%, 100% { opacity: 0; } }
+@keyframes f-t2 { 0%, 43% { opacity: 0; } 44%, 59% { opacity: 1; } 60%, 100% { opacity: 0; } }
+@keyframes f-t3 { 0%, 59% { opacity: 0; } 60%, 100% { opacity: 1; } }
+@keyframes f-files { 0%, 78% { opacity: 0; transform: translateY(10px); } 83%, 93% { opacity: 1; transform: none; } 99%, 100% { opacity: 0; } }
+
+/* ---------- 更多入口 ---------- */
+.ng-more {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 22px;
+  padding: 28px 0 64px;
+  border-top: 1px dashed var(--ng-rule);
+}
+
+.ng-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ng-chip {
+  padding: 7px 14px;
+  border: 1.5px solid var(--ng-ink);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background .15s, color .15s;
+}
+
+.ng-home a.ng-chip:hover {
+  background: var(--ng-ink);
+  color: var(--ng-paper);
+}
+
+.ng-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 22px 0;
+  border-top: 2px solid var(--ng-ink);
+  color: var(--ng-muted);
+  font-size: 13px;
+}
+
+.ng-home :is(a, figure):focus-visible {
+  outline: 2px solid var(--ng-accent);
+  outline-offset: 4px;
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 1080px) and (min-width: 861px) {
+  .ng-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .ng-shell {
+    width: min(100% - 48px, 600px);
+  }
+
+  .ng-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ng-sketch {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .ng-callout {
+    position: static;
+    margin: -12% 6px 0 0;
+  }
+
+  .ng-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 420px) {
+  .ng-shell {
+    width: calc(100% - 32px);
+  }
+
+  .ng-sect-head span {
+    display: none;
+  }
+
+  .ng-callout {
+    padding: 10px 13px;
+  }
+
+  .ng-callout strong {
+    font-size: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* 功能卡片停在一个能看懂的画面上，而不是全部隐藏 */
+  .ng-stage * {
+    animation-delay: calc(var(--ng-loop) * -.8) !important;
+    animation-play-state: paused !important;
+  }
+
+  .ng-home *:not(.ng-stage *) {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .ng-stroke { stroke-dashoffset: 0; }
+  .ng-arrow,
+  .ng-note,
+  .ng-callout { opacity: 1; }
+}
