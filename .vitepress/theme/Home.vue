@@ -7,14 +7,16 @@ const releases = 'https://github.com/DoerrDev/NextGestures/releases/latest'
 const cursor = 'M0 0 L0 17 L4.6 12.8 L7.6 19.6 L10.4 18.4 L7.4 11.8 L13 11.6 Z'
 
 const more = [
-  { text: '快速打开程序', link: '/guide/actions/launch-app' },
-  { text: '按下快捷键', link: '/guide/actions/hotkey' },
-  { text: '录制键盘动作', link: '/guide/actions/key-sequence' },
-  { text: '鼠标中键触发', link: '/guide/triggers/middle-button' },
+  { text: '快捷键触发', link: '/guide/triggers/hotkey' },
+  { text: '启动程序', link: '/guide/actions/launch-app' },
+  { text: '发送按键', link: '/guide/actions/hotkey' },
+  { text: '按键序列', link: '/guide/actions/key-sequence' },
+  { text: '贴图', link: '/guide/actions/pin' },
+  { text: '自定义 AI 动作', link: '/guide/ai/custom' },
   { text: '马上执行 / 松手执行', link: '/guide/timing/immediate' },
   { text: '按程序配置', link: '/guide/profiles/apps' },
-  { text: '黑名单', link: '/guide/profiles/blacklist' },
-  { text: '快速开关手势', link: '/guide/settings/toggle' },
+  { text: '交给程序自带手势', link: '/guide/profiles/passthrough' },
+  { text: '开关手势与快捷键', link: '/guide/settings/toggle' },
 ]
 </script>
 
@@ -24,7 +26,7 @@ const more = [
       <section class="ng-hero">
         <div class="ng-intro">
           <h1>画一笔，<br><em>事就办了。</em></h1>
-          <p class="ng-lede">按住鼠标右键画一段轨迹，或者在屏幕边角滚一下滚轮，就能关闭标签页、打开程序、截图贴图，或者把选中的文字交给 AI 翻译。一个 Windows 小工具，不打扰，随叫随到。</p>
+          <p class="ng-lede">按住鼠标右键画一段轨迹、在屏幕边角滚一下滚轮，或者按一个快捷键，就能关闭标签页、打开程序、截图贴图，或者把选中的文字交给 AI 处理。一个 Windows 小工具，不打扰，随叫随到。</p>
           <div class="ng-actions">
             <a class="ng-primary" :href="releases"><span aria-hidden="true">↓</span> 下载 Windows 版</a>
             <a class="ng-secondary" :href="withBase('/guide/')">五分钟上手 <span aria-hidden="true">→</span></a>
@@ -147,12 +149,12 @@ const more = [
               </svg>
             </div>
             <span class="ng-tag">动作</span>
-            <h3>截图并置顶</h3>
-            <p>拖选一块区域，变成浮在所有窗口上方的贴图，可以标注、复制、保存，调透明度。</p>
+            <h3>截图与贴图</h3>
+            <p>拖选或单击吸附一块区域，标注后复制、保存，或贴成浮在所有窗口上方的贴图，随手缩放、折叠。</p>
           </a>
 
           <!-- 04 AI 翻译 -->
-          <a class="ng-demo" :href="withBase('/guide/actions/translate')">
+          <a class="ng-demo" :href="withBase('/guide/ai/')">
             <div class="ng-stage">
               <svg viewBox="0 0 320 200" role="img" aria-label="演示：选中英文句子，卡片中逐字出现中文译文">
                 <defs>
@@ -166,7 +168,7 @@ const more = [
                   <rect class="d-shadow" x="24" y="96" width="280" height="90" />
                   <rect class="d-card" x="20" y="92" width="280" height="90" />
                   <text class="d-zh" x="34" y="130" textLength="190" lengthAdjust="spacingAndGlyphs" clip-path="url(#ng-d-clip)">最近的地铁站在哪里？</text>
-                  <text class="d-small d-busy" x="34" y="168">正在翻译 · Esc 取消</text>
+                  <text class="d-small d-busy" x="34" y="168">正在处理 · Esc 取消</text>
                   <g class="d-done">
                     <rect class="d-ink" x="246" y="155" width="42" height="20" rx="3" />
                     <text class="d-btn" x="267" y="169" text-anchor="middle">复制</text>
@@ -174,9 +176,9 @@ const more = [
                 </g>
               </svg>
             </div>
-            <span class="ng-tag">动作 · AI</span>
-            <h3>翻译、润色、粤拼</h3>
-            <p>选中文字画个手势，译文在卡片里逐字出现；也能把英文改得更地道，或给中文标注粤拼。</p>
+            <span class="ng-tag">AI 动作</span>
+            <h3>AI 处理选中文字</h3>
+            <p>选中文字画个手势，交给 AI 翻译、润色或标注粤拼；还能写自己的 Prompt，做成专属动作。</p>
           </a>
 
           <!-- 05 选中即搜 -->
@@ -213,7 +215,7 @@ const more = [
           </a>
 
           <!-- 06 区域录屏 -->
-          <a class="ng-demo" :href="withBase('/guide/actions/screenshot#区域录屏')">
+          <a class="ng-demo" :href="withBase('/guide/actions/record')">
             <div class="ng-stage">
               <svg viewBox="0 0 320 200" role="img" aria-label="演示：框选区域开始录屏，停止后导出 MP4 或 GIF">
                 <rect class="d-line" x="80" y="56" width="150" height="7" />

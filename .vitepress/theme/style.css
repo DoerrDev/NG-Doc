@@ -15,6 +15,15 @@
   font-weight: 700;
 }
 
+/* 文档配图也用这套墨色 */
+:root {
+  --ng-ink: #1c1b19;
+  --ng-paper: #f4f1ea;
+  --ng-accent: #e5532d;
+  --ng-muted: #6b665d;
+  --ng-rule: #bdb6a8;
+}
+
 .ng-home {
   --ng-ink: #1c1b19;
   --ng-paper: #f4f1ea;
@@ -555,4 +564,39 @@
   .ng-arrow,
   .ng-note,
   .ng-callout { opacity: 1; }
+}
+
+/* ---------- 文档配图 ---------- */
+.vp-doc .ng-fig {
+  margin: 20px 0 24px;
+  padding: 14px 14px 10px;
+  border: 1.5px solid var(--ng-ink);
+  border-radius: 8px;
+  background: var(--ng-paper);
+  box-shadow: 3px 3px 0 var(--ng-ink);
+}
+.vp-doc .ng-fig svg { display: block; width: 100%; height: auto; }
+.vp-doc .ng-fig figcaption,
+.vp-doc .shot-cap {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ng-muted);
+  text-align: center;
+}
+.vp-doc img.shot {
+  display: block;
+  margin: 18px auto 6px;
+  border: 1px solid var(--ng-rule);
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(28, 27, 25, .12);
+  cursor: zoom-in;
+}
+.vp-doc img.shot.narrow { max-width: min(360px, 100%); }
+.vp-doc img.shot.mid { max-width: min(520px, 100%); }
+.vp-doc img.shot.small { max-width: min(300px, 100%); }
+.vp-doc .shot-cap { margin-bottom: 20px; }
+@media (prefers-reduced-motion: reduce) {
+  /* 停在一帧能看清结果的位置 */
+  .vp-doc .ng-fig * { animation-play-state: paused !important; animation-delay: -4.2s !important; }
 }
